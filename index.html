@@ -176,6 +176,166 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-tags/tech/你不知道的JavaScript—笔记（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/26/tags/tech/你不知道的JavaScript—笔记（一）/">你不知道的JavaScript—笔记（一）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/26/tags/tech/你不知道的JavaScript—笔记（一）/" class="archive-article-date">
+  	<time datetime="2017-03-26T08:46:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div align="center"><br> <img src="http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png" width="300" align="center"><br></div></p>
+<h4 id="关于这本书"><a href="#关于这本书" class="headerlink" title="关于这本书"></a>关于这本书</h4><p>准确的说，我看到是“上”，现在“中”已经出版了，但是还没有中文版，看这书的热度，“下”肯定是会有的。<br>这次笔记，我计划是按照书的“部分”划分来写：“上”包括两个部分：<strong><em>第一部分：作用域和闭包；第二部分：this和对象原型</em></strong></p>
+<h4 id="先说下基础知识"><a href="#先说下基础知识" class="headerlink" title="先说下基础知识"></a>先说下基础知识</h4><p>程序中一段源代码在执行之前会经历三个步骤，统称为“编译”。</p>
+<ol>
+<li>分词/词法分析</li>
+<li>解析/语法分析</li>
+<li>代码生成</li>
+</ol>
+<h6 id="编译中的角色"><a href="#编译中的角色" class="headerlink" title="编译中的角色"></a>编译中的角色</h6><ul>
+<li>引擎</li>
+</ul>
+<p>从头到尾负责整个JavaScript程序的编译及执行过程。</p>
+<ul>
+<li>编译器</li>
+</ul>
+<p>引擎的好朋友之一，负责语法分析及代码生成等脏活累活（详见前一节的内容）。</p>
+<ul>
+<li>作用域</li>
+</ul>
+<p>引擎的另一位好朋友，负责收集并维护由所有声明的标识符（变量）组成的一系列查询，并实施一套非常严格的规则，确定当前执行的代码对这些标识符的访问权限。”</p>
+<h6 id="RHS和LHS"><a href="#RHS和LHS" class="headerlink" title="RHS和LHS"></a>RHS和LHS</h6><p>“RHS查询与简单地查找某个变量的值别无二致，而LHS查询则是试图找到变量的容器本身，从而可以对其赋值。”</p>
+<h6 id="引擎与作用域对话过程"><a href="#引擎与作用域对话过程" class="headerlink" title="引擎与作用域对话过程"></a>引擎与作用域对话过程</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">“function foo(a) &#123;</div><div class="line">    var b = a;</div><div class="line">    return a + b;</div><div class="line">&#125;</div><div class="line">var c = foo( 2 );”</div></pre></td></tr></table></figure>
+<p>引擎：作用域，我需要对foo进行RHS引用<br>作用域： 编译器说foo是个函数，给你<br>引擎 ：执行foo<br>引擎：作用域，我需要对a进行LHS引用<br>作用域: a 是foo中声明的形参，给你<br>引擎：现在讲2赋值给a</p>
+<h6 id="作用域嵌套"><a href="#作用域嵌套" class="headerlink" title="作用域嵌套"></a>作用域嵌套</h6><ul>
+<li>当一个块或函数嵌套在另一个块或函数中时，就发生了作用域的嵌套。因此，在当前作用域中无法找到某个变量时，引擎就会在外层嵌套的作用域中继续查找，直到找到该变量，或抵达最外层的作用域（也就是全局作用域）为止”</li>
+<li>“JavaScript中的eval(..)函数可以接受一个字符串为参数，并将其中的内容视为好像在书写时就存在于程序中这个位置的代码。”</li>
+</ul>
+<h6 id="函数优先"><a href="#函数优先" class="headerlink" title="函数优先"></a>函数优先</h6><p>函数声明和变量声明都会被提升。但是一个值得注意的细节（这个细节可以出现在有多个“重复”声明的代码中）是函数会首先被提升，然后才是变量。</p>
+<h6 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h6><p>“闭包是基于词法作用域书写代码时所产生的自然结果，你甚至不需要为了利用它们而有意识地创建闭包。闭包的创建和使用在你的代码中随处可见。你缺少的是根据你自己的意愿来识别、拥抱和影响闭包的思维环境。</p>
+<p>“当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。”</p>
+<h4 id="提升"><a href="#提升" class="headerlink" title="提升"></a>提升</h4><ul>
+<li>是现有声明后有赋值的；</li>
+<li>“函数声明和变量声明都会被提升。但是一个值得注意的细节（这个细节可以出现在有多个“重复”声明的代码中）是函数会首先被提升”</li>
+</ul>
+<h4 id="var-和-let"><a href="#var-和-let" class="headerlink" title="var 和 let"></a>var 和 let</h4><p>let是es6新增的语法，相对于var,主要区别体现在作用域上，使用let令语法拥有创建块作用域的能力；而之前的var是共享作用域。</p>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>“简单来说，箭头函数在涉及this绑定时的行为和普通函数的行为完全不一致。它放弃了所有普通this绑定的规则，取而代之的是用当前的词法作用域覆盖了this本来的值。”</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tech</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/26/tags/tech/你不知道的JavaScript—笔记（一）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-tags/bookList/你不知道的JavaScript" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/26/tags/bookList/你不知道的JavaScript/">Web全栈工程师的自我修养</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/26/tags/bookList/你不知道的JavaScript/" class="archive-article-date">
+  	<time datetime="2017-03-26T05:32:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="美国-Kyle-Simpson"><a href="#美国-Kyle-Simpson" class="headerlink" title="[美国] Kyle Simpson"></a>[美国] Kyle Simpson</h4><p><div align="center"><br><img src="http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png" width="300" align="center"><br> </div></p>
+<h4 id="大致上，在伯乐在线上看到的推荐，号称2016必看的前端书籍，然后就入了，Kindle和Mac交叉攻读中…"><a href="#大致上，在伯乐在线上看到的推荐，号称2016必看的前端书籍，然后就入了，Kindle和Mac交叉攻读中…" class="headerlink" title="大致上，在伯乐在线上看到的推荐，号称2016必看的前端书籍，然后就入了，Kindle和Mac交叉攻读中….."></a>大致上，在伯乐在线上看到的推荐，号称2016必看的前端书籍，然后就入了，Kindle和Mac交叉攻读中…..</h4><p>既然这么推荐了，自然好是好书，特别是对于我这个种半吊子，基础极不扎实的新手。<br>最近上拉钩、Bose直聘，还有听知乎Live，看相关的专栏，也有一些体会。现在这个阶段，一定得夯实基础。从去年十月专职写前端代码，首先是学会用框架，先把程序跑起来；然后是深究函数，换着花样的整数据，当然顺便对Css是运用水平也提高不少。最近开始关注结构性的东西，怎么开发组件、自动化文档生成、打包工具的配置。<br>既然是好书，那必须细读了，笔记和总结另外写在了《技术》栏下。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bookList</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/26/tags/bookList/你不知道的JavaScript/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-tags/feel/诺贝尔经济学奖得主：特朗普上台，中国该往何处去-笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -196,7 +356,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Live-时间：-北京时间-3月21日"><a href="#Live-时间：-北京时间-3月21日" class="headerlink" title="Live 时间： 北京时间 3月21日"></a>Live 时间： 北京时间 3月21日</h2><p><img src="https://pic2.zhimg.com/v2-ca746dceb2c5b3626e616028cc139b49_l.jpg" alt=""></p>
+        <h2 id="Live-时间：-北京时间-3月21日"><a href="#Live-时间：-北京时间-3月21日" class="headerlink" title="Live 时间： 北京时间 3月21日"></a>Live 时间： 北京时间 3月21日</h2><p><div align="center"><br><img src="http://omxp6dvkg.bkt.clouddn.com/17-3-26/26665190-file_1490517779321_d082.jpg" alt=""><br></div></p>
 <h2 id="Live-主讲人：JosephE-Stiglitz"><a href="#Live-主讲人：JosephE-Stiglitz" class="headerlink" title="Live 主讲人：JosephE.Stiglitz"></a>Live 主讲人：JosephE.Stiglitz</h2><p><strong>（美国经济学家，诺贝尔经济学奖，诺贝尔和平奖获得者）</strong></p>
 <h2 id="Live-话题：-特朗普上台，中国该往何处去"><a href="#Live-话题：-特朗普上台，中国该往何处去" class="headerlink" title="Live 话题： 特朗普上台，中国该往何处去"></a>Live 话题： 特朗普上台，中国该往何处去</h2><p>Live大约一小时多一点，提问很踊跃，貌似提问者主要是中国所谓的精英阶级（企业高管、知名大V）和各路求知进步青年，貌似不少是研习经济学的同学。<br>教授对该问题的回答我觉得比较中肯，主要集中在川普的“新保护主义”。以下是对Live的笔记</p>
 <h4 id="关于全球化、自由贸易"><a href="#关于全球化、自由贸易" class="headerlink" title="关于全球化、自由贸易"></a>关于全球化、自由贸易</h4><p>其本质，是做出资源的最佳分配和利用。通过信息共享和打破贸易壁垒，使“物美价廉”令全球收益，这里涵盖商品的原材、制造，以及信息、服务产业。例如中东向世界其他地区输出石油，中国以及东南亚的工业产品，美国的高科技，都是各个领域的在世界范围内的最佳选择（既保有最高性价比）。<br>全球化绝对是一个多边收益的结果，教授说到，经济学家绝不会单独去看双边贸易顺（逆）差，而是通过多边贸易去衡量，就比如美国本土制造IPhone,虽然与中国的贸易逆差会减少，但是制造IPhone需要从其他国家进口诸多元器件以及原材料（而这些的产地也在东亚），最终的结果一方面肯定是IPhone成本上涨，另一方面，其涉及到的多面贸易顺（逆）差就不好判断了。最坏的结果，被摧毁的工作岗位数量远远超过了被创造的工作岗位数量。</p>
@@ -796,133 +956,6 @@
 
 
   
-    <article id="post-tags/bookList/你一生的故事" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/15/tags/bookList/你一生的故事/">你一生的故事</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/15/tags/bookList/你一生的故事/" class="archive-article-date">
-  	<time datetime="2017-02-15T13:58:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="作者-特德·蒋"><a href="#作者-特德·蒋" class="headerlink" title="作者 特德·蒋"></a>作者 特德·蒋</h4><p><div align="center"><br><img src="http://ojx968xzy.bkt.clouddn.com/nysdgs.jpg" alt=""><br> </div></p>
-<h4 id="需要费些心去读的"><a href="#需要费些心去读的" class="headerlink" title="需要费些心去读的"></a>需要费些心去读的</h4><p>&emsp;&emsp;<strong>国内当代名家的随笔精选集</strong><br>&emsp;&emsp;第一篇同名小说改编成了电影《降临》，全新的视角，出色的想象力，戏剧性的结局，看了小说之后又去看了电影，二者都不错。<br>&emsp;&emsp;第二篇巴别塔重塑了巴比伦神话故事，小时候听过这个故事，这一次深刻的重读了：人们花费终生去寻找的天堂之门，最终的结果可能是又一次来到起点。<br>&emsp;&emsp;《领悟》描写了人类智力发展到极致时的所思所想，以及这种超级智慧的终极目的。</p>
-<h4 id="科幻中参透着哲学，一口气读完不太可能，每次可以读一篇。"><a href="#科幻中参透着哲学，一口气读完不太可能，每次可以读一篇。" class="headerlink" title="科幻中参透着哲学，一口气读完不太可能，每次可以读一篇。"></a>科幻中参透着哲学，一口气读完不太可能，每次可以读一篇。</h4><p>&emsp;&emsp;再感慨一下，自己的思维深度还不够呀，说实话读的不透。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bookList</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/15/tags/bookList/你一生的故事/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-tags/bookList/这个世界是有趣的" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/12/tags/bookList/这个世界是有趣的/">这个世界是有趣的</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/12/tags/bookList/这个世界是有趣的/" class="archive-article-date">
-  	<time datetime="2017-02-12T13:58:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="主-编：刘明清-孟波"><a href="#主-编：刘明清-孟波" class="headerlink" title="主 编：刘明清,孟波"></a>主 编：刘明清,孟波</h4><p><div align="center"><br><img src="https://img3.doubanio.com/lpic/s27262345.jpg" alt=""><br> </div></p>
-<h4 id="充满温暖的一个下午"><a href="#充满温暖的一个下午" class="headerlink" title="充满温暖的一个下午"></a>充满温暖的一个下午</h4><p>&emsp;&emsp;<strong>是小说集，主要收录作者的主要短篇小说作品</strong><br>&emsp;&emsp;阅读门槛蛮低呀，有时间都可以看下。有意思的故事挺多的，文章或温文尔雅，或妙语连珠、或犀利独大。不经意间，却可以感受到大家们对待生活、对待世事的不羁心态。<br>&emsp;&emsp;感觉上还有些像高雅版的鱼羊野史，夹杂着对人生和社会的感悟，了解到一些新东西。大概花了四五个小时看完.</p>
-<h4 id="无论发生好的、不好的事情我们都可以用一种超然的态度去审视这个世界。"><a href="#无论发生好的、不好的事情我们都可以用一种超然的态度去审视这个世界。" class="headerlink" title="无论发生好的、不好的事情我们都可以用一种超然的态度去审视这个世界。"></a>无论发生好的、不好的事情我们都可以用一种超然的态度去审视这个世界。</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bookList</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/12/tags/bookList/这个世界是有趣的/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1020,11 +1053,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">feel</a>
+                <a href="javascript:void(0)" class="js-tag color5">tech</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tech</a>
+                <a href="javascript:void(0)" class="js-tag color5">feel</a>
               </li>
             
             <div class="clearfix"></div>
