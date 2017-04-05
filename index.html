@@ -176,6 +176,176 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-tags/tech/你不知道的JavaScript—笔记（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/06/tags/tech/你不知道的JavaScript—笔记（二）/">你不知道的JavaScript—笔记（二）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/06/tags/tech/你不知道的JavaScript—笔记（二）/" class="archive-article-date">
+  	<time datetime="2017-04-06T08:46:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div align="center"><br> <img src="http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png" width="300" align="center"><br></div></p>
+<h4 id="关于这本书"><a href="#关于这本书" class="headerlink" title="关于这本书"></a>关于这本书</h4><p>准确的说，我看到是“上”，现在“中”已经出版了，但是还没有中文版，看这书的热度，“下”肯定是会有的。<br>这次笔记，我计划是按照书的“部分”划分来写：“上”包括四个部分：<strong><em>第一部分：作用域和闭包；第二部分：this和对象原型；第三部分：混合对象“类”和原型；第四部分：行为委托和其他</em></strong></p>
+<h4 id="以下是第二部分"><a href="#以下是第二部分" class="headerlink" title="以下是第二部分"></a>以下是第二部分</h4><h5 id="为什么要用this"><a href="#为什么要用this" class="headerlink" title="为什么要用this"></a>为什么要用this</h5><p>this提供了一种优雅的方法传递对变量的应用，可以使api设计更简洁并更易于复用</p>
+<h5 id="对this的误解"><a href="#对this的误解" class="headerlink" title="对this的误解"></a>对this的误解</h5><p>1、并不是指向自身<br>2、this在任何情况下并不指向函数的语法作用域</p>
+<h5 id="什么是this"><a href="#什么是this" class="headerlink" title="什么是this"></a>什么是this</h5><p>“当一个函数被调用时，会创建一个活动记录（有时候也称为执行上下文）。这个记录会包含函数在哪里被调用（调用栈）、函数的调用方法、传入的参数等信息。this就是记录的其中一个属性，会在函数执行的过程中用到。”</p>
+<h5 id="this的绑定"><a href="#this的绑定" class="headerlink" title="this的绑定"></a>this的绑定</h5><ol>
+<li>默认绑定<br>使用声明在全局中的变量</li>
+<li>隐式绑定<br>“当函数引用有上下文对象时，隐式绑定规则会把函数调用中的this绑定到这个上下文对象。”<br>“对象属性引用链中只有最顶层或者说最后一层会影响调用位置”<br>“在非严格模式，隐式绑定对象会因为应用默认绑定而丢失”</li>
+<li>显式绑定<br>通过call()，apply()强制调用其他函数<br>“可惜，显式绑定仍然无法解决我们之前提出的丢失绑定问题。</li>
+<li>new绑定</li>
+</ol>
+<p>“首先我们重新定义一下JavaScript中的“构造函数”。JavaScript，构造函数只是一些使用new操作符时被调用的函数。它们并不会属于某个类，也不会实例化一个类。”</p>
+<p>“使用new来调用函数，或者说发生构造函数调用时，会自动执行下面的操作。”</p>
+<ol>
+<li><p>创建（或者说构造）一个全新的对象。</p>
+</li>
+<li><p>这个新对象会被执行[[原型]]连接。</p>
+</li>
+<li><p>这个新对象会绑定到函数调用的this。</p>
+</li>
+<li><p>如果函数没有返回其他对象，那么new表达式中的函数调用会自动返回这个新对象。”</p>
+</li>
+</ol>
+<h5 id="call方法"><a href="#call方法" class="headerlink" title="call方法:"></a>call方法:</h5><p>语法：call([thisObj[,arg1[, arg2[,   [,.argN]]]]])<br>定义：调用一个对象的一个方法，以另一个对象替换当前对象。<br>说明：<br>call 方法可以用来代替另一个对象调用一个方法。call 方法可将一个函数的对象上下文从初始的上下文改变为由 thisObj 指定的新对象。<br>如果没有提供 thisObj 参数，那么 Global 对象被用作 thisObj。 </p>
+<h5 id="apply方法："><a href="#apply方法：" class="headerlink" title="apply方法："></a>apply方法：</h5><ul>
+<li>语法： apply([thisObj[,argArray]]) </li>
+<li>定义： 应用某一对象的一个方法，用另一个对象替换当前对象。 </li>
+<li>说明： 如果 argArray 不是一个有效的数组或者不是 arguments 对象，那么将导致一个 TypeError。 如果没有提供 argArray 和 thisObj 任何一个参数，那么 Global 对象将被用作 thisObj， 并且无法被传递任何参数。<br>这两个方法基本上是一个意思，区别在于 call 的第二个参数可以是任意类型，而apply的第二个参数必须是数组，也可以是arguments</li>
+</ul>
+<h5 id="优先级-new-gt-显示-gt-隐式-gt-默认"><a href="#优先级-new-gt-显示-gt-隐式-gt-默认" class="headerlink" title="优先级 new&gt;显示&gt;隐式&gt;默认"></a>优先级 new&gt;显示&gt;隐式&gt;默认</h5><p>箭头函数的绑定无法被（call/apply）修改</p>
+<p>“如果你经常编写this风格的代码，但是绝大部分时候都会使用self = this或者箭头函数来否定this机制，那你或许应当：<br>当然，包含这两种代码风格的程序可以正常运行，但是在同一个函数或者同一个程序中混合使用这两种风格通常会使代码更难维护，并且可能也会更难编写。”</p>
+<ol>
+<li>只使用词法作用域并完全抛弃错误this风格的代码；</li>
+<li>完全采用this风格，在必要时使用bind(..)，尽量避免使用self = this和箭头函数。”<h5 id="空对象"><a href="#空对象" class="headerlink" title="空对象"></a>空对象</h5>目的：防止误绑定到全局对象<br>“var ø = Object.create( null );”</li>
+</ol>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>JavaScript的基本类型一共六种，包括：boolean，null，number，undefined, object, string<br>对象可以通过两种方式定义：声明（文字）形式和构造形式。<br>区别：文字声明可以一次添加多个键/值对，而构造需要逐个添加。</p>
+<p>语法bug: typerof null时会返回字符串“object”，然而null也是基本类型</p>
+<p>属性描述符 包含三种特性：<strong><em>可写、可枚举、可配置(修改属性)</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Object.defineProperty(..)   添加、修改属性</div><div class="line">Object.getOwnPropertyDescriptor( myObject, &quot;a&quot; ); </div><div class="line">var myObject=&#123;&#125;;</div><div class="line">“Object.defineProperty( myObject, &quot;a&quot;, &#123;</div><div class="line">    value: 2,</div><div class="line">    writable: true, </div><div class="line">    configurable: true, </div><div class="line">    enumerable: true</div><div class="line">&#125; ); ”</div></pre></td></tr></table></figure></p>
+<h4 id="Enumerable"><a href="#Enumerable" class="headerlink" title="Enumerable"></a>Enumerable</h4><p>可枚举，相当于可以出现在for的遍历中<br>不变性</p>
+<p>“当你给一个属性定义getter、setter或者两者都有时，这个属性会被定义为“访问描述符”  。对于访问描述符来说，JavaScript会忽略它的value和writable特性</p>
+<p>存在性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var myObject = &#123; </div><div class="line">    a:2</div><div class="line">&#125;;</div><div class="line"></div><div class="line">(&quot;a&quot; in myObject); // true</div><div class="line">(&quot;b&quot; in myObject); // false</div></pre></td></tr></table></figure></p>
+<p>属性的特性可以通过属性描述符来控制，比如writable和configurable。此外，可以使用Object.preventExtensions(..)、Object.seal(..)和Object.freeze(..)来设置对象（及其属性）的不可变性级别。</p>
+<h5 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h5><p>“可以使用ES6的for..of语法来遍历数据结构（数组、对象，等等）中的值，for..of会寻找内置或者自定义的@@iterator对象并调用它的next()方法来遍历数据值。”</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tech</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/06/tags/tech/你不知道的JavaScript—笔记（二）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-tags/bookList/长安十二时辰（全）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/05/tags/bookList/长安十二时辰（全）/">长安十二时辰</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/05/tags/bookList/长安十二时辰（全）/" class="archive-article-date">
+  	<time datetime="2017-04-05T13:10:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="作者-马伯庸"><a href="#作者-马伯庸" class="headerlink" title="作者 马伯庸"></a>作者 马伯庸</h4><div align="center"><br><img src="http://omxp6dvkg.bkt.clouddn.com/17-4-5/54933377-file_1491398095297_a20.jpg" alt=""></div>
+
+<h4 id="想要一口气读完的类型"><a href="#想要一口气读完的类型" class="headerlink" title="想要一口气读完的类型"></a>想要一口气读完的类型</h4><p>过年的时候，就在期待这部小说，趁着清明节终于读完了，小说分上下两册，应该算是中篇。小说内容就我的感受还是很有吸引力，大致看了十来个小时。</p>
+<h4 id="要说这个小说，必须先谈两个事情。"><a href="#要说这个小说，必须先谈两个事情。" class="headerlink" title="要说这个小说，必须先谈两个事情。"></a>要说这个小说，必须<strong>先谈两个事情。</strong></h4><p>著名美国反恐剧《24 hours》，我是铁杆粉，真的可以这么说，<strong>8季正剧（每季24集），1季完结篇（12集），还有一部番外电影，全看了！</strong>看第一季还是上初一，应该是我看的第一部真正意义上的美剧。由此发现了新世界，开启了对英美剧的转粉之路。以前初中放暑假的时候，看《24小时》是从早上看到半夜，除了去吃饭中途不干别的，真的是第一次对电视剧有这么大的魔性。这不小说可以就说是对24小时的致敬：靖安司就是CTU，负责反恐，隐于面下，但是可以调动巨大的资源，并人才济济：张小敬就是杰克鲍尔，<strong>一个是十年西域兵，九年不良帅，一个是三角洲部队成员，反恐行动负责人</strong>，并且两人对于家庭，国家，政治利益的看法充满了不谋而合。虽然相隔以前多年，如果把张小敬的弩机换成杰克的手枪，似乎两者的身影就重合在了一起。<br>另一个是作者，“亲王”马伯庸，认识他是通过《古董局中局》，共4部。亲王对历史文化方面的深厚功力令我佩服，更让我佩服的是亲王对情节的掌控能力。不读到最后，永远猜不到真相到底是什么，由亲王来讲24小时的故事，也真的是再适合不过。所以，年前看到这部小说的时候就充满了期待，结果自然也是不负众望。</p>
+<h4 id="再聊聊小说"><a href="#再聊聊小说" class="headerlink" title="再聊聊小说"></a>再聊聊小说</h4><p>小说的故事，简单的说就是唐代的反恐24小时。张小敬，这个本来已经打入监牢的死囚。一步步的在重重迷住之中抽丝剥茧，带着读者揭开了事实的真相，为了化解危机，必须具备当机立断的决心，以及细致入微的分析，当然作为主人公还有矫健的身手，才可以在危机之中杀出一条血路。最后的真相无意是令人意外的，然而当知道真相后，就如两位主人公的对话所说，似乎真相仅仅是一个答案，反而并不重要了；真的有可能若干年后再回想起这部小说，会忘记结局是什么。但是会记得那些尔虞我诈，人性的狡诈，以及政治的残酷。也许还会忘记张小敬这个名字，但是那个追求大义的无畏会在此记下。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bookList</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/05/tags/bookList/长安十二时辰（全）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-tags/tech/你不知道的JavaScript—笔记（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -197,7 +367,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><div align="center"><br> <img src="http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png" width="300" align="center"><br></div></p>
-<h4 id="关于这本书"><a href="#关于这本书" class="headerlink" title="关于这本书"></a>关于这本书</h4><p>准确的说，我看到是“上”，现在“中”已经出版了，但是还没有中文版，看这书的热度，“下”肯定是会有的。<br>这次笔记，我计划是按照书的“部分”划分来写：“上”包括两个部分：<strong><em>第一部分：作用域和闭包；第二部分：this和对象原型</em></strong></p>
+<h4 id="关于这本书"><a href="#关于这本书" class="headerlink" title="关于这本书"></a>关于这本书</h4><p>准确的说，我看到是“上”，现在“中”已经出版了，但是还没有中文版，看这书的热度，“下”肯定是会有的。<br>这次笔记，我计划是按照书的“部分”划分来写：“上”包括两个部分：<strong><em>第一部分：作用域和闭包；第二部分：this和对象原型；第三部分：混合对象“类”和原型；第四部分：行为委托和其他</em></strong></p>
 <h4 id="先说下基础知识"><a href="#先说下基础知识" class="headerlink" title="先说下基础知识"></a>先说下基础知识</h4><p>程序中一段源代码在执行之前会经历三个步骤，统称为“编译”。</p>
 <ol>
 <li>分词/词法分析</li>
@@ -286,7 +456,7 @@
 
         
         <a href="/2017/03/26/tags/bookList/你不知道的JavaScript/" class="archive-article-date">
-  	<time datetime="2017-03-26T05:32:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-26</time>
+  	<time datetime="2017-03-26T05:32:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-26</time>
 </a>
         
       </header>
@@ -830,132 +1000,6 @@
 
 
   
-    <article id="post-tags/bookList/Web全栈工程师的自我修养" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/10/tags/bookList/Web全栈工程师的自我修养/">Web全栈工程师的自我修养</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/10/tags/bookList/Web全栈工程师的自我修养/" class="archive-article-date">
-  	<time datetime="2017-03-10T13:58:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="作者-余果（就职于鹅厂）"><a href="#作者-余果（就职于鹅厂）" class="headerlink" title="作者 余果（就职于鹅厂）"></a>作者 余果（就职于鹅厂）</h4><p><div align="center"><br><img src="http://ojx968xzy.bkt.clouddn.com/webgcsdzwxy.jpg" alt=""><br> </div></p>
-<h4 id="强烈推荐！！！"><a href="#强烈推荐！！！" class="headerlink" title="强烈推荐！！！"></a>强烈推荐！！！</h4><p>&emsp;&emsp;关于互联网，技术向的书很少见到这么切真务实的。作者从自己在大学时候学习，到找工作的过程、到做项目的经历，以及从事新人招聘的过程说起。仿佛作者就是身边一位优秀的学长，看完书后，收获太多太多。对我自己的职业规划、技术路线、以及需要注意的习惯都再度刷新。<br>&emsp;&emsp;<strong>很接地气的一本书！</strong></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bookList</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/10/tags/bookList/Web全栈工程师的自我修养/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-tags/bookList/上海王" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/25/tags/bookList/上海王/">上海王</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/25/tags/bookList/上海王/" class="archive-article-date">
-  	<time datetime="2017-02-25T13:58:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="作者-虹影"><a href="#作者-虹影" class="headerlink" title="作者 虹影"></a>作者 虹影</h4><p><div align="center"><br><img src="http://ojx968xzy.bkt.clouddn.com/shw.jpg" alt=""><br> </div></p>
-<h4 id="聊胜于无"><a href="#聊胜于无" class="headerlink" title="聊胜于无"></a>聊胜于无</h4><p>&emsp;&emsp;<strong>蛮通俗的小说，看过之后才知道其先后改编了电影和电视剧。</strong><br>&emsp;&emsp;总体而言，叙事还是不错的。情节紧凑而又跌宕。不过最终没有耐心去看完，了解了下后边的故事，有时间也行再继续看下。<br>&emsp;&emsp;在此值得一说的，倒是作者，她是一名海外华文作家。与严歌苓，加拿大的张翎，并称<em>海外华文文学三剑客</em>，以前严歌苓的作品倒是度过不少，她们都有些共同之处：作品中的女性人物，往往坚强并富有想法，男性人物反而埋没在其光辉之下；并且男性比较标签化，或大气、或贪婪。个人倒是比较欣赏其书中的诸多女性，看来我应算是个主张男女平等的。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bookList</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/25/tags/bookList/上海王/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1053,11 +1097,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tech</a>
+                <a href="javascript:void(0)" class="js-tag color5">feel</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">feel</a>
+                <a href="javascript:void(0)" class="js-tag color5">tech</a>
               </li>
             
             <div class="clearfix"></div>
