@@ -16,7 +16,7 @@
 <meta property="og:description" content="为什么写这篇文章使用React作为前端框架，是使我理解前端组件化、打包，并体会MVVM模型的起点，现在回想起来，那个过程是充实而又痛苦的：一大堆新概念一下子都甩到脸上，ES6语法竟然区别这么大！怎么什么都要Npm？Webpack…恩是这体系的基石。那段时间里，我发现自己好像完全不懂前端。从跑通第一个demo，到学会使用组件，最后可以使用框架完成项目，我对于MVVM的理解也在不断加深。到了后来">
 <meta property="og:image" content="http://omxp6dvkg.bkt.clouddn.com/17-4-12/83221004-file_1492007685610_3ab4.jpg">
 <meta property="og:image" content="http://omxp6dvkg.bkt.clouddn.com/17-4-12/88694581-file_1492007739822_123d9.jpg">
-<meta property="og:updated_time" content="2017-04-12T15:43:25.000Z">
+<meta property="og:updated_time" content="2017-04-12T15:50:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端框架—React与Vue的比较">
 <meta name="twitter:description" content="为什么写这篇文章使用React作为前端框架，是使我理解前端组件化、打包，并体会MVVM模型的起点，现在回想起来，那个过程是充实而又痛苦的：一大堆新概念一下子都甩到脸上，ES6语法竟然区别这么大！怎么什么都要Npm？Webpack…恩是这体系的基石。那段时间里，我发现自己好像完全不懂前端。从跑通第一个demo，到学会使用组件，最后可以使用框架完成项目，我对于MVVM的理解也在不断加深。到了后来">
@@ -201,14 +201,16 @@
         <p><div align="center"><br> <img src="http://omxp6dvkg.bkt.clouddn.com/17-4-12/83221004-file_1492007685610_3ab4.jpg" width="300" align="center"><br> <img src="http://omxp6dvkg.bkt.clouddn.com/17-4-12/88694581-file_1492007739822_123d9.jpg" width="230" align="center"><br></div></p>
 <h4 id="为什么写这篇文章"><a href="#为什么写这篇文章" class="headerlink" title="为什么写这篇文章"></a>为什么写这篇文章</h4><p>使用React作为前端框架，是使我理解前端组件化、打包，并体会MVVM模型的起点，现在回想起来，那个过程是充实而又痛苦的：一大堆新概念一下子都甩到脸上，ES6语法竟然区别这么大！怎么什么都要Npm？Webpack…恩是这体系的基石。那段时间里，我发现自己好像完全不懂前端。从跑通第一个demo，到学会使用组件，最后可以使用框架完成项目，我对于MVVM的理解也在不断加深。到了后来学习Vue就轻松了很多，看API大致十天，用vue+vuex完成项目中一个功能花了一个星期，这自然是要归结于在学习react中积累的经验，想当初完成第一个功能模块，是整整两个月！<br><strong>现在这里说下个人观点，两者都很优秀，哪个玩转了都是棒棒哒；个人的话更细化Vue，主要是因为学习成本更低，上手更容易</strong></p>
 <p>本文作者也做了总结：</p>
-<pre><code>如果你喜欢用（或希望能够用）模板搭建应用，请使用Vue
-如果你喜欢简单和“能用就行”的东西，请使用Vue
-如果你的应用需要尽可能的小和快，请使用Vue
-如果你计划构建一个大型应用程序，请使用React
-如果你想要一个同时适用于Web端和原生App的框架，请选择React
-如果你想要最大的生态圈，请使用React
-如果你已经对其中一个用得满意了，就没有必要换了
-</code></pre><h2 id="以下是正文"><a href="#以下是正文" class="headerlink" title="以下是正文"></a>以下是正文</h2><p>2016年，React在Web端和移动端都实现了迅速的成长，稳稳地领先于其主要竞争对手Augular，巩固了其作为前端框架之王的地位。</p>
+<ul>
+<li>如果你喜欢用（或希望能够用）模板搭建应用，请使用Vue</li>
+<li>如果你喜欢简单和“能用就行”的东西，请使用Vue</li>
+<li>如果你的应用需要尽可能的小和快，请使用Vue</li>
+<li>如果你计划构建一个大型应用程序，请使用React</li>
+<li>如果你想要一个同时适用于Web端和原生App的框架，请选择React</li>
+<li>如果你想要最大的生态圈，请使用React</li>
+<li>如果你已经对其中一个用得满意了，就没有必要换了</li>
+</ul>
+<h2 id="以下是正文"><a href="#以下是正文" class="headerlink" title="以下是正文"></a>以下是正文</h2><p>2016年，React在Web端和移动端都实现了迅速的成长，稳稳地领先于其主要竞争对手Augular，巩固了其作为前端框架之王的地位。</p>
 <p>但是Vue在这一年里的表现也可谓同样的耀眼。Vue.js 2.0 的发布在整个JavaScript社区都引起了巨大反响，这一点仅从它在Github中涨了25,000颗star，就足以得到证明。</p>
 <p>不得不说React和Vue的使用范围是相似的：都是基于组件化的轻量级框架，都专注于构建用户界面的视图层；都既可以用于简单的项目，也适用于使用前沿技术的大规模复杂项目。</p>
 <p>因此，很多Web开发者都难免纠结到底要从中选择哪一个框架。这两者中能否分出个高下好坏？或者它们各自有哪些优缺点是需要我们注意的？还是说它们实际上差不多，用谁都一样？</p>
@@ -260,8 +262,8 @@
 <li><p>更大的生态圈带来的更多支持和工具</p>
 </li>
 </ul>
-<p>而实际上，React和Vue都是非常优秀的框架，它们之间的相似之处多过不同之处，并且它们大部分最棒的功能是相通的：</p>
-<ul>
+<p><strong><em>而实际上，React和Vue都是非常优秀的框架，它们之间的相似之处多过不同之处，并且它们大部分最棒的功能是相通的：</em></strong></p>
+<h3 id="他们的共同点："><a href="#他们的共同点：" class="headerlink" title="他们的共同点："></a>他们的共同点：</h3><ul>
 <li><p>利用虚拟DOM实现快速渲染</p>
 </li>
 <li><p>轻量级</p>
