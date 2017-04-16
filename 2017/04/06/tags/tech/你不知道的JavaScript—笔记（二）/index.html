@@ -8,21 +8,28 @@
   <link rel="dns-prefetch" href="http://zuoxu91u.com">
   <title>你不知道的JavaScript—笔记（二） | 左旭的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于这本书准确的说，我看到是“上”，现在“中”已经出版了，但是还没有中文版，看这书的热度，“下”肯定是会有的。这次笔记，我计划是按照书的“部分”划分来写：“上”包括四个部分：第一部分：作用域和闭包；第二部分：this和对象原型；第三部分：混合对象“类”和原型；第四部分：行为委托和其他
-以下是第二部分为什么要用thisthis提供了一种优雅的方法传递对变量的应用，可以使api设计更简洁并更易于复">
+  <meta name="description" content="&amp;lt;div align=center  &amp;gt;
+&amp;lt;img src=&amp;quot;http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png&amp;quot; width = &amp;quot;300&amp;quot;  align=center /&amp;gt;
+&amp;lt;/div&amp;gt;
+关于这本书
+准确的说，我看">
 <meta property="og:type" content="article">
 <meta property="og:title" content="你不知道的JavaScript—笔记（二）">
 <meta property="og:url" content="http://zuoxu91u.com/2017/04/06/tags/tech/你不知道的JavaScript—笔记（二）/index.html">
 <meta property="og:site_name" content="左旭的博客">
-<meta property="og:description" content="关于这本书准确的说，我看到是“上”，现在“中”已经出版了，但是还没有中文版，看这书的热度，“下”肯定是会有的。这次笔记，我计划是按照书的“部分”划分来写：“上”包括四个部分：第一部分：作用域和闭包；第二部分：this和对象原型；第三部分：混合对象“类”和原型；第四部分：行为委托和其他
-以下是第二部分为什么要用thisthis提供了一种优雅的方法传递对变量的应用，可以使api设计更简洁并更易于复">
-<meta property="og:image" content="http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png">
+<meta property="og:description" content="&amp;lt;div align=center  &amp;gt;
+&amp;lt;img src=&amp;quot;http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png&amp;quot; width = &amp;quot;300&amp;quot;  align=center /&amp;gt;
+&amp;lt;/div&amp;gt;
+关于这本书
+准确的说，我看">
 <meta property="og:updated_time" content="2017-04-05T14:47:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="你不知道的JavaScript—笔记（二）">
-<meta name="twitter:description" content="关于这本书准确的说，我看到是“上”，现在“中”已经出版了，但是还没有中文版，看这书的热度，“下”肯定是会有的。这次笔记，我计划是按照书的“部分”划分来写：“上”包括四个部分：第一部分：作用域和闭包；第二部分：this和对象原型；第三部分：混合对象“类”和原型；第四部分：行为委托和其他
-以下是第二部分为什么要用thisthis提供了一种优雅的方法传递对变量的应用，可以使api设计更简洁并更易于复">
-<meta name="twitter:image" content="http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png">
+<meta name="twitter:description" content="&amp;lt;div align=center  &amp;gt;
+&amp;lt;img src=&amp;quot;http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png&amp;quot; width = &amp;quot;300&amp;quot;  align=center /&amp;gt;
+&amp;lt;/div&amp;gt;
+关于这本书
+准确的说，我看">
   
     <link rel="alternative" href="/atom.xml" title="左旭的博客" type="application/atom+xml">
   
@@ -200,49 +207,89 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div align="center"><br> <img src="http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png" width="300" align="center"><br></div></p>
-<h4 id="关于这本书"><a href="#关于这本书" class="headerlink" title="关于这本书"></a>关于这本书</h4><p>准确的说，我看到是“上”，现在“中”已经出版了，但是还没有中文版，看这书的热度，“下”肯定是会有的。<br>这次笔记，我计划是按照书的“部分”划分来写：“上”包括四个部分：<strong><em>第一部分：作用域和闭包；第二部分：this和对象原型；第三部分：混合对象“类”和原型；第四部分：行为委托和其他</em></strong></p>
-<h4 id="以下是第二部分"><a href="#以下是第二部分" class="headerlink" title="以下是第二部分"></a>以下是第二部分</h4><h5 id="为什么要用this"><a href="#为什么要用this" class="headerlink" title="为什么要用this"></a>为什么要用this</h5><p>this提供了一种优雅的方法传递对变量的应用，可以使api设计更简洁并更易于复用</p>
-<h5 id="对this的误解"><a href="#对this的误解" class="headerlink" title="对this的误解"></a>对this的误解</h5><p>1、并不是指向自身<br>2、this在任何情况下并不指向函数的语法作用域</p>
-<h5 id="什么是this"><a href="#什么是this" class="headerlink" title="什么是this"></a>什么是this</h5><p>“当一个函数被调用时，会创建一个活动记录（有时候也称为执行上下文）。这个记录会包含函数在哪里被调用（调用栈）、函数的调用方法、传入的参数等信息。this就是记录的其中一个属性，会在函数执行的过程中用到。”</p>
-<h5 id="this的绑定"><a href="#this的绑定" class="headerlink" title="this的绑定"></a>this的绑定</h5><ol>
-<li>默认绑定<br>使用声明在全局中的变量</li>
-<li>隐式绑定<br>“当函数引用有上下文对象时，隐式绑定规则会把函数调用中的this绑定到这个上下文对象。”<br>“对象属性引用链中只有最顶层或者说最后一层会影响调用位置”<br>“在非严格模式，隐式绑定对象会因为应用默认绑定而丢失”</li>
-<li>显式绑定<br>通过call()，apply()强制调用其他函数<br>“可惜，显式绑定仍然无法解决我们之前提出的丢失绑定问题。</li>
+        <p>&lt;div align=center  &gt;
+&lt;img src=&quot;http://omxp6dvkg.bkt.clouddn.com/17-3-26/12136778-file_1490518027734_17c07.png&quot; width = &quot;300&quot;  align=center /&gt;
+&lt;/div&gt;</p>
+<h4>关于这本书</h4>
+<p>准确的说，我看到是“上”，现在“中”已经出版了，但是还没有中文版，看这书的热度，“下”肯定是会有的。
+这次笔记，我计划是按照书的“部分”划分来写：“上”包括四个部分：<strong><em>第一部分：作用域和闭包；第二部分：this和对象原型；第三部分：混合对象“类”和原型；第四部分：行为委托和其他</em></strong></p>
+<h4>以下是第二部分</h4>
+<h5>为什么要用this</h5>
+<p>this提供了一种优雅的方法传递对变量的应用，可以使api设计更简洁并更易于复用</p>
+<h5>对this的误解</h5>
+<p>1、并不是指向自身
+2、this在任何情况下并不指向函数的语法作用域</p>
+<h5>什么是this</h5>
+<p>“当一个函数被调用时，会创建一个活动记录（有时候也称为执行上下文）。这个记录会包含函数在哪里被调用（调用栈）、函数的调用方法、传入的参数等信息。this就是记录的其中一个属性，会在函数执行的过程中用到。”</p>
+<h5>this的绑定</h5>
+<ol>
+<li>默认绑定
+使用声明在全局中的变量</li>
+<li>隐式绑定
+“当函数引用有上下文对象时，隐式绑定规则会把函数调用中的this绑定到这个上下文对象。”
+“对象属性引用链中只有最顶层或者说最后一层会影响调用位置”
+“在非严格模式，隐式绑定对象会因为应用默认绑定而丢失”</li>
+<li>显式绑定
+通过call()，apply()强制调用其他函数
+“可惜，显式绑定仍然无法解决我们之前提出的丢失绑定问题。</li>
 <li>new绑定</li>
 </ol>
 <p>“首先我们重新定义一下JavaScript中的“构造函数”。JavaScript，构造函数只是一些使用new操作符时被调用的函数。它们并不会属于某个类，也不会实例化一个类。”</p>
-<p>“使用new来调用函数，或者说发生构造函数调用时，会自动执行下面的操作。”</p>
+<p>“使用new来调用函数，或者说发生构造函数调用时，会自动执行下面的操作。&quot;</p>
 <ol>
-<li><p>创建（或者说构造）一个全新的对象。</p>
+<li>
+<p>创建（或者说构造）一个全新的对象。</p>
 </li>
-<li><p>这个新对象会被执行[[原型]]连接。</p>
+<li>
+<p>这个新对象会被执行[[原型]]连接。</p>
 </li>
-<li><p>这个新对象会绑定到函数调用的this。</p>
+<li>
+<p>这个新对象会绑定到函数调用的this。</p>
 </li>
-<li><p>如果函数没有返回其他对象，那么new表达式中的函数调用会自动返回这个新对象。”</p>
+<li>
+<p>如果函数没有返回其他对象，那么new表达式中的函数调用会自动返回这个新对象。”</p>
 </li>
 </ol>
-<h5 id="call方法"><a href="#call方法" class="headerlink" title="call方法:"></a>call方法:</h5><p>语法：call([thisObj[,arg1[, arg2[,   [,.argN]]]]])<br>定义：调用一个对象的一个方法，以另一个对象替换当前对象。<br>说明：<br>call 方法可以用来代替另一个对象调用一个方法。call 方法可将一个函数的对象上下文从初始的上下文改变为由 thisObj 指定的新对象。<br>如果没有提供 thisObj 参数，那么 Global 对象被用作 thisObj。 </p>
-<h5 id="apply方法："><a href="#apply方法：" class="headerlink" title="apply方法："></a>apply方法：</h5><ul>
-<li>语法： apply([thisObj[,argArray]]) </li>
-<li>定义： 应用某一对象的一个方法，用另一个对象替换当前对象。 </li>
-<li>说明： 如果 argArray 不是一个有效的数组或者不是 arguments 对象，那么将导致一个 TypeError。 如果没有提供 argArray 和 thisObj 任何一个参数，那么 Global 对象将被用作 thisObj， 并且无法被传递任何参数。<br>这两个方法基本上是一个意思，区别在于 call 的第二个参数可以是任意类型，而apply的第二个参数必须是数组，也可以是arguments</li>
+<h5>call方法:</h5>
+<p>语法：call([thisObj[,arg1[, arg2[,   [,.argN]]]]])
+定义：调用一个对象的一个方法，以另一个对象替换当前对象。
+说明：
+call 方法可以用来代替另一个对象调用一个方法。call 方法可将一个函数的对象上下文从初始的上下文改变为由 thisObj 指定的新对象。
+如果没有提供 thisObj 参数，那么 Global 对象被用作 thisObj。</p>
+<h5>apply方法：</h5>
+<ul>
+<li>语法： apply([thisObj[,argArray]])</li>
+<li>定义： 应用某一对象的一个方法，用另一个对象替换当前对象。</li>
+<li>说明： 如果 argArray 不是一个有效的数组或者不是 arguments 对象，那么将导致一个 TypeError。 如果没有提供 argArray 和 thisObj 任何一个参数，那么 Global 对象将被用作 thisObj， 并且无法被传递任何参数。
+这两个方法基本上是一个意思，区别在于 call 的第二个参数可以是任意类型，而apply的第二个参数必须是数组，也可以是arguments</li>
 </ul>
-<h5 id="优先级-new-gt-显示-gt-隐式-gt-默认"><a href="#优先级-new-gt-显示-gt-隐式-gt-默认" class="headerlink" title="优先级 new&gt;显示&gt;隐式&gt;默认"></a>优先级 new&gt;显示&gt;隐式&gt;默认</h5><p>箭头函数的绑定无法被（call/apply）修改</p>
-<p>“如果你经常编写this风格的代码，但是绝大部分时候都会使用self = this或者箭头函数来否定this机制，那你或许应当：<br>当然，包含这两种代码风格的程序可以正常运行，但是在同一个函数或者同一个程序中混合使用这两种风格通常会使代码更难维护，并且可能也会更难编写。”</p>
+<h5>优先级 new&gt;显示&gt;隐式&gt;默认</h5>
+<p>箭头函数的绑定无法被（call/apply）修改</p>
+<p>“如果你经常编写this风格的代码，但是绝大部分时候都会使用self = this或者箭头函数来否定this机制，那你或许应当：
+当然，包含这两种代码风格的程序可以正常运行，但是在同一个函数或者同一个程序中混合使用这两种风格通常会使代码更难维护，并且可能也会更难编写。”</p>
 <ol>
 <li>只使用词法作用域并完全抛弃错误this风格的代码；</li>
-<li>完全采用this风格，在必要时使用bind(..)，尽量避免使用self = this和箭头函数。”<h5 id="空对象"><a href="#空对象" class="headerlink" title="空对象"></a>空对象</h5>目的：防止误绑定到全局对象<br>“var ø = Object.create( null );”</li>
+<li>完全采用this风格，在必要时使用bind(..)，尽量避免使用self = this和箭头函数。”</li>
 </ol>
-<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>JavaScript的基本类型一共六种，包括：boolean，null，number，undefined, object, string<br>对象可以通过两种方式定义：声明（文字）形式和构造形式。<br>区别：文字声明可以一次添加多个键/值对，而构造需要逐个添加。</p>
+<h5>空对象</h5>
+<p>目的：防止误绑定到全局对象
+“var ø = Object.create( null );”</p>
+<h3>对象</h3>
+<p>JavaScript的基本类型一共六种，包括：boolean，null，number，undefined, object, string
+对象可以通过两种方式定义：声明（文字）形式和构造形式。
+区别：文字声明可以一次添加多个键/值对，而构造需要逐个添加。</p>
 <p>语法bug: typerof null时会返回字符串“object”，然而null也是基本类型</p>
-<p>属性描述符 包含三种特性：<strong><em>可写、可枚举、可配置(修改属性)</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Object.defineProperty(..)   添加、修改属性</div><div class="line">Object.getOwnPropertyDescriptor( myObject, &quot;a&quot; ); </div><div class="line">var myObject=&#123;&#125;;</div><div class="line">“Object.defineProperty( myObject, &quot;a&quot;, &#123;</div><div class="line">    value: 2,</div><div class="line">    writable: true, </div><div class="line">    configurable: true, </div><div class="line">    enumerable: true</div><div class="line">&#125; ); ”</div></pre></td></tr></table></figure></p>
-<h4 id="Enumerable"><a href="#Enumerable" class="headerlink" title="Enumerable"></a>Enumerable</h4><p>可枚举，相当于可以出现在for的遍历中<br>不变性</p>
+<p>属性描述符 包含三种特性：<strong><em>可写、可枚举、可配置(修改属性)</em></strong>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Object.defineProperty(..)   添加、修改属性</div><div class="line">Object.getOwnPropertyDescriptor( myObject, &quot;a&quot; ); </div><div class="line">var myObject=&#123;&#125;;</div><div class="line">“Object.defineProperty( myObject, &quot;a&quot;, &#123;</div><div class="line">    value: 2,</div><div class="line">    writable: true, </div><div class="line">    configurable: true, </div><div class="line">    enumerable: true</div><div class="line">&#125; ); ”</div></pre></td></tr></table></figure></p>
+<h4>Enumerable</h4>
+<p>可枚举，相当于可以出现在for的遍历中<br>
+不变性</p>
 <p>“当你给一个属性定义getter、setter或者两者都有时，这个属性会被定义为“访问描述符”  。对于访问描述符来说，JavaScript会忽略它的value和writable特性</p>
-<p>存在性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var myObject = &#123; </div><div class="line">    a:2</div><div class="line">&#125;;</div><div class="line"></div><div class="line">(&quot;a&quot; in myObject); // true</div><div class="line">(&quot;b&quot; in myObject); // false</div></pre></td></tr></table></figure></p>
+<p>存在性
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var myObject = &#123; </div><div class="line">    a:2</div><div class="line">&#125;;</div><div class="line"></div><div class="line">(&quot;a&quot; in myObject); // true</div><div class="line">(&quot;b&quot; in myObject); // false</div></pre></td></tr></table></figure></p>
 <p>属性的特性可以通过属性描述符来控制，比如writable和configurable。此外，可以使用Object.preventExtensions(..)、Object.seal(..)和Object.freeze(..)来设置对象（及其属性）的不可变性级别。</p>
-<h5 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h5><p>“可以使用ES6的for..of语法来遍历数据结构（数组、对象，等等）中的值，for..of会寻找内置或者自定义的@@iterator对象并调用它的next()方法来遍历数据值。”</p>
+<h5>遍历</h5>
+<p>“可以使用ES6的for..of语法来遍历数据结构（数组、对象，等等）中的值，for..of会寻找内置或者自定义的@@iterator对象并调用它的next()方法来遍历数据值。”</p>
 
       
 
@@ -472,7 +519,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
+                <a href="javascript:void(0)" class="js-tag color5">tech</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -480,7 +527,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tech</a>
+                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
               </li>
             
             <div class="clearfix"></div>
