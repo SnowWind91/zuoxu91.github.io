@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="左旭的博客">
 <meta property="og:description" content="前言
 最近来了新的同事，我向他们介绍了下现有技术栈。然后自然是一遍又一遍的讲解，其中有一个问题：“你们的前后端间通讯的传输协议是什么的？”，我想都没想就回答：“ajax呀！，当然还可以用fetch或axios”，这样说好像没什么问题（然而并不是），如果还是刚工作时候的自己，应该会这么想的，可是现在都快工作一年了，那可不能再这样做。其实以上几种都属于http传输协议，今天就说下另一种：Webstoc">
-<meta property="og:updated_time" content="2017-04-16T13:07:56.000Z">
+<meta property="og:updated_time" content="2017-04-16T14:29:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于WebSocket 的推送方法">
 <meta name="twitter:description" content="前言
@@ -211,6 +211,8 @@
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">CODE:</div><div class="line">// 创建一个Socket实例</div><div class="line">var socket = new WebSocket(&apos;ws://localhost:8080&apos;); </div><div class="line"></div><div class="line">// 打开Socket </div><div class="line">socket.onopen = function(event) &#123; </div><div class="line"></div><div class="line">  // 发送一个初始化消息</div><div class="line">  socket.send(&apos;I am the client and I\&apos;m listening!&apos;); </div><div class="line"></div><div class="line">  // 监听消息</div><div class="line">  socket.onmessage = function(event) &#123; </div><div class="line">    console.log(&apos;Client received a message&apos;,event); </div><div class="line">  &#125;; </div><div class="line"></div><div class="line">  // 监听Socket的关闭</div><div class="line">  socket.onclose = function(event) &#123; </div><div class="line">    console.log(&apos;Client notified socket has closed&apos;,event); </div><div class="line">  &#125;; </div><div class="line"></div><div class="line">  // 关闭Socket.... </div><div class="line">  //socket.close() </div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <h3>有什么特点</h3>
 <p>其实和http协议很相似，亮点是他的<strong>主动性</strong>，因为是基于http协议而设计的，但是，不再是原来“一问一答”的形式，既每次前端发出请求，后端接受到请求之后再返回Response；而是具备了“广播”的特点，可以是前端来发起对话，也可以是服务器主动广播，直到前端接受到信息为止。如果比喻成谈朋友，http协议就是像是刚搭讪上，男的（前端）问一句，女的（Server）回答一句，有可能一不小心来个通讯中断（Bed request）,双方就不联系了。而webstocket是到了热恋中，妹子是很热情的，不用主动去聊，妹子总会有话题的，如果你敢长时间不回，电话就来啦！</p>
+<h3>适用场景</h3>
+<p>在线聊天、邮箱、看股票、实时监测等</p>
 
       
 
@@ -325,9 +327,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2017/04/23/tags/bookList/老人战争/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          老人战争
+        
+      </div>
+    </a>
   
-    <a href="/2017/04/12/tags/tech/前端框架—React与Vue的比较/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">前端框架—React与Vue的比较</div>
+  
+    <a href="/2017/04/15/tags/bookList/过日子要有技术含量/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">过日子要有技术含量</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -431,15 +442,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">tech</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">feel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bookList</a>
               </li>
             
             <div class="clearfix"></div>
