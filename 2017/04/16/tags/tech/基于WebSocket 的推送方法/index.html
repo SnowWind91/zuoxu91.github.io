@@ -8,19 +8,16 @@
   <link rel="dns-prefetch" href="http://zuoxu91u.com">
   <title>基于WebSocket 的推送方法 | 左旭的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言
-最近来了新的同事，我向他们介绍了下现有技术栈。然后自然是一遍又一遍的讲解，其中有一个问题：“你们的前后端间通讯的传输协议是什么的？”，我想都没想就回答：“ajax呀！，当然还可以用fetch或axios”，这样说好像没什么问题（然而并不是），如果还是刚工作时候的自己，应该会这么想的，可是现在都快工作一年了，那可不能再这样做。其实以上几种都属于http传输协议，今天就说下另一种：Webstoc">
+  <meta name="description" content="前言最近来了新的同事，我向他们介绍了下现有技术栈。然后自然是一遍又一遍的讲解，其中有一个问题：“你们的前后端间通讯的传输协议是什么的？”，我想都没想就回答：“ajax呀！，当然还可以用fetch或axios”，这样说好像没什么问题（然而并不是），如果还是刚工作时候的自己，应该会这么想的，可是现在都快工作一年了，那可不能再这样做。其实以上几种都属于http传输协议，今天就说下另一种：Webstock">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于WebSocket 的推送方法">
 <meta property="og:url" content="http://zuoxu91u.com/2017/04/16/tags/tech/基于WebSocket 的推送方法/index.html">
 <meta property="og:site_name" content="左旭的博客">
-<meta property="og:description" content="前言
-最近来了新的同事，我向他们介绍了下现有技术栈。然后自然是一遍又一遍的讲解，其中有一个问题：“你们的前后端间通讯的传输协议是什么的？”，我想都没想就回答：“ajax呀！，当然还可以用fetch或axios”，这样说好像没什么问题（然而并不是），如果还是刚工作时候的自己，应该会这么想的，可是现在都快工作一年了，那可不能再这样做。其实以上几种都属于http传输协议，今天就说下另一种：Webstoc">
+<meta property="og:description" content="前言最近来了新的同事，我向他们介绍了下现有技术栈。然后自然是一遍又一遍的讲解，其中有一个问题：“你们的前后端间通讯的传输协议是什么的？”，我想都没想就回答：“ajax呀！，当然还可以用fetch或axios”，这样说好像没什么问题（然而并不是），如果还是刚工作时候的自己，应该会这么想的，可是现在都快工作一年了，那可不能再这样做。其实以上几种都属于http传输协议，今天就说下另一种：Webstock">
 <meta property="og:updated_time" content="2017-04-16T14:29:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于WebSocket 的推送方法">
-<meta name="twitter:description" content="前言
-最近来了新的同事，我向他们介绍了下现有技术栈。然后自然是一遍又一遍的讲解，其中有一个问题：“你们的前后端间通讯的传输协议是什么的？”，我想都没想就回答：“ajax呀！，当然还可以用fetch或axios”，这样说好像没什么问题（然而并不是），如果还是刚工作时候的自己，应该会这么想的，可是现在都快工作一年了，那可不能再这样做。其实以上几种都属于http传输协议，今天就说下另一种：Webstoc">
+<meta name="twitter:description" content="前言最近来了新的同事，我向他们介绍了下现有技术栈。然后自然是一遍又一遍的讲解，其中有一个问题：“你们的前后端间通讯的传输协议是什么的？”，我想都没想就回答：“ajax呀！，当然还可以用fetch或axios”，这样说好像没什么问题（然而并不是），如果还是刚工作时候的自己，应该会这么想的，可是现在都快工作一年了，那可不能再这样做。其实以上几种都属于http传输协议，今天就说下另一种：Webstock">
   
     <link rel="alternative" href="/atom.xml" title="左旭的博客" type="application/atom+xml">
   
@@ -198,21 +195,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2>前言</h2>
-<p>最近来了新的同事，我向他们介绍了下现有技术栈。然后自然是一遍又一遍的讲解，其中有一个问题：“你们的前后端间通讯的传输协议是什么的？”，我想都没想就回答：“ajax呀！，当然还可以用fetch或axios”，这样说好像没什么问题（<s>然而并不是</s>），如果还是刚工作时候的自己，应该会这么想的，可是现在都快工作一年了，那可不能再这样做。其实以上几种都属于http传输协议，今天就说下另一种：<strong><em>Webstock协议</em></strong>.</p>
-<h2>什么是Webstock</h2>
-<p>WebSocket API是下一代客户端-服务器的异步通信方法。该通信取代了单个的TCP套接字，使用ws或wss协议，可用于任意的客户端和服务器程序。WebSocket目前由W3C进行标准化。WebSocket已经受到Firefox 4、Chrome 4、Opera 10.70以及Safari 5等浏览器的支持。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近来了新的同事，我向他们介绍了下现有技术栈。然后自然是一遍又一遍的讲解，其中有一个问题：“你们的前后端间通讯的传输协议是什么的？”，我想都没想就回答：“ajax呀！，当然还可以用fetch或axios”，这样说好像没什么问题（<del>然而并不是</del>），如果还是刚工作时候的自己，应该会这么想的，可是现在都快工作一年了，那可不能再这样做。其实以上几种都属于http传输协议，今天就说下另一种：<strong><em>Webstock协议</em></strong>.</p>
+<h2 id="什么是Webstock"><a href="#什么是Webstock" class="headerlink" title="什么是Webstock"></a>什么是Webstock</h2><p>WebSocket API是下一代客户端-服务器的异步通信方法。该通信取代了单个的TCP套接字，使用ws或wss协议，可用于任意的客户端和服务器程序。WebSocket目前由W3C进行标准化。WebSocket已经受到Firefox 4、Chrome 4、Opera 10.70以及Safari 5等浏览器的支持。</p>
 <p>WebSocket API最伟大之处在于服务器和客户端可以在给定的时间范围内的任意时刻，相互推送信息。WebSocket并不限于以Ajax(或XHR)方式通信，因为Ajax技术需要客户端发起请求，而WebSocket服务器和客户端可以彼此相互推送信息；XHR受到域的限制，而WebSocket允许跨域通信。</p>
 <p>Ajax技术很聪明的一点是没有设计要使用的方式。WebSocket为指定目标创建，用于双向推送消息。</p>
-<h2>怎么用？</h2>
-<p>先去下插件啦，如果是node，用这个：</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install socket.io --save</div></pre></td></tr></table></figure></p>
-<h4>具体写法是这样：</h4>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">CODE:</div><div class="line">// 创建一个Socket实例</div><div class="line">var socket = new WebSocket(&apos;ws://localhost:8080&apos;); </div><div class="line"></div><div class="line">// 打开Socket </div><div class="line">socket.onopen = function(event) &#123; </div><div class="line"></div><div class="line">  // 发送一个初始化消息</div><div class="line">  socket.send(&apos;I am the client and I\&apos;m listening!&apos;); </div><div class="line"></div><div class="line">  // 监听消息</div><div class="line">  socket.onmessage = function(event) &#123; </div><div class="line">    console.log(&apos;Client received a message&apos;,event); </div><div class="line">  &#125;; </div><div class="line"></div><div class="line">  // 监听Socket的关闭</div><div class="line">  socket.onclose = function(event) &#123; </div><div class="line">    console.log(&apos;Client notified socket has closed&apos;,event); </div><div class="line">  &#125;; </div><div class="line"></div><div class="line">  // 关闭Socket.... </div><div class="line">  //socket.close() </div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h3>有什么特点</h3>
-<p>其实和http协议很相似，亮点是他的<strong>主动性</strong>，因为是基于http协议而设计的，但是，不再是原来“一问一答”的形式，既每次前端发出请求，后端接受到请求之后再返回Response；而是具备了“广播”的特点，可以是前端来发起对话，也可以是服务器主动广播，直到前端接受到信息为止。如果比喻成谈朋友，http协议就是像是刚搭讪上，男的（前端）问一句，女的（Server）回答一句，有可能一不小心来个通讯中断（Bed request）,双方就不联系了。而webstocket是到了热恋中，妹子是很热情的，不用主动去聊，妹子总会有话题的，如果你敢长时间不回，电话就来啦！</p>
-<h3>适用场景</h3>
-<p>在线聊天、邮箱、看股票、实时监测等</p>
+<h2 id="怎么用？"><a href="#怎么用？" class="headerlink" title="怎么用？"></a>怎么用？</h2><p>先去下插件啦，如果是node，用这个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install socket.io --save</div></pre></td></tr></table></figure>
+<h4 id="具体写法是这样："><a href="#具体写法是这样：" class="headerlink" title="具体写法是这样："></a>具体写法是这样：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">CODE:</div><div class="line">// 创建一个Socket实例</div><div class="line">var socket = new WebSocket(&apos;ws://localhost:8080&apos;); </div><div class="line"></div><div class="line">// 打开Socket </div><div class="line">socket.onopen = function(event) &#123; </div><div class="line"></div><div class="line">  // 发送一个初始化消息</div><div class="line">  socket.send(&apos;I am the client and I\&apos;m listening!&apos;); </div><div class="line"></div><div class="line">  // 监听消息</div><div class="line">  socket.onmessage = function(event) &#123; </div><div class="line">    console.log(&apos;Client received a message&apos;,event); </div><div class="line">  &#125;; </div><div class="line"></div><div class="line">  // 监听Socket的关闭</div><div class="line">  socket.onclose = function(event) &#123; </div><div class="line">    console.log(&apos;Client notified socket has closed&apos;,event); </div><div class="line">  &#125;; </div><div class="line"></div><div class="line">  // 关闭Socket.... </div><div class="line">  //socket.close() </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="有什么特点"><a href="#有什么特点" class="headerlink" title="有什么特点"></a>有什么特点</h3><p>其实和http协议很相似，亮点是他的<strong>主动性</strong>，因为是基于http协议而设计的，但是，不再是原来“一问一答”的形式，既每次前端发出请求，后端接受到请求之后再返回Response；而是具备了“广播”的特点，可以是前端来发起对话，也可以是服务器主动广播，直到前端接受到信息为止。如果比喻成谈朋友，http协议就是像是刚搭讪上，男的（前端）问一句，女的（Server）回答一句，有可能一不小心来个通讯中断（Bed request）,双方就不联系了。而webstocket是到了热恋中，妹子是很热情的，不用主动去聊，妹子总会有话题的，如果你敢长时间不回，电话就来啦！</p>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>在线聊天、邮箱、看股票、实时监测等</p>
 
       
 
@@ -446,11 +437,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tech</a>
+                <a href="javascript:void(0)" class="js-tag color5">feel</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">feel</a>
+                <a href="javascript:void(0)" class="js-tag color5">tech</a>
               </li>
             
             <div class="clearfix"></div>
